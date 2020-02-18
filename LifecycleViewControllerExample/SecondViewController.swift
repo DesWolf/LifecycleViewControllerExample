@@ -12,13 +12,13 @@ class SecondViewController: UIViewController {
 
     var someProperties: String? {
         didSet{
-           print("someProperties")
+           print("Загрузка значения someProperties")
         }
     }
     
     @IBOutlet weak var closeButton: UIButton! {
         didSet{
-            print("closeButton")
+            print("Загрузка кнопки closeButton")
         }
     }
     
@@ -30,7 +30,7 @@ class SecondViewController: UIViewController {
     // Срабатывает при загрузке View
     override func viewDidLoad() {
          super.viewDidLoad()
-        hello()
+        print("ViewDidload - срабатывает при загрузке View")
      }
     
     //Срабатывает перед появлением вью на экране
@@ -38,19 +38,21 @@ class SecondViewController: UIViewController {
         print("ViewWillAppear - срабатывает перед появлением вью на экране")
     }
     
-    //Срабатывает когда экран появился
-    override func viewDidAppear(_ animated: Bool) {
-        print("ViewWDidAppear - срабатывает когда экран появился")
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        print("updateViewConstraints - тут можно изменить значение констант констрейнтов")
     }
-    
     //Срабатывает перед тем когда размер вью поменяется под размер экрана
     override func viewWillLayoutSubviews() {
         print("viewWillLayoutSubviews - срабатывает перед тем, когда размер вью поменяется под размер экрана")
     }
     
+    // Тут срабатывают Autolayout
+    
     //Срабатывает после того, когда размер вью поменяется под размер экрана
     override func viewDidLayoutSubviews() {
         print("viewDidLayoutSubviews - срабатывает после того, когда размер вью поменяется под размер экрана")
+        // тут можно отследить какая ячейка была выделена или на каком месте остался scrollView
     }
     
     //Срабатывает перед поворотом экрана
@@ -63,11 +65,9 @@ class SecondViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func hello() {
-        print("ViewDidload - срабатывает при загрузке View")
-    }
-    @IBAction func close(_ sender: UIButton){
-        dismiss(animated: true, completion: nil)
+    //Срабатывает когда экран появился
+    override func viewDidAppear(_ animated: Bool) {
+        print("ViewWDidAppear - срабатывает когда экран появился")
     }
     
     //Срабатывает  перед тем как вью закроется
@@ -83,4 +83,9 @@ class SecondViewController: UIViewController {
     deinit{
         print("deinit - выгружает объект из памяти")
     }
+    
+    @IBAction func close(_ sender: UIButton){
+        dismiss(animated: true, completion: nil)
+    }
 }
+
